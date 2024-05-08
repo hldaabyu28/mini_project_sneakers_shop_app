@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:mini_project_shoes_app/controllers/auth_controller.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -11,24 +12,27 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    print('Profile Page');
+    final authController = Provider.of<AuthController>(context, listen: false);
+ 
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profil'),
+        title: Text('Profile'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Usernama',
+              'Username: ',
               style: TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Text('Email'),
-            Text('Phone Number'),
+            Text('Email: '),
+            Text('Phone Number: '),
+            SizedBox(height: 20),
             TextButton(
               style: TextButton.styleFrom(
                 foregroundColor: Colors.white,
@@ -37,14 +41,17 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 backgroundColor: Colors.red,
               ),
-              onPressed: (){},
-               
-              child: Text('Logout')),
-            
+              onPressed: () async {
+                // Call logout method
+                authController.logout();
+                // Navigate to login screen
+                Navigator.pushReplacementNamed(context, '/login');
+              },
+              child: Text('Logout'),
+            ),
           ],
         ),
       ),
-     
     );
   }
 }

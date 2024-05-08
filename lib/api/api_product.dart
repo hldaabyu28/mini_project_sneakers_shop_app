@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import 'package:mini_project_shoes_app/models/product_model.dart';
+
 
 class ApiProduct {
   final Dio _dio = Dio();

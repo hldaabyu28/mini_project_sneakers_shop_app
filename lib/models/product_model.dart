@@ -27,8 +27,18 @@ class ProductModel {
       description: json['description'] ?? '',
       price: (json['price'] ?? 0), // Ubah tipe data dan konversi ke double
       createdAt: DateTime.parse(json['created_at'] ?? ''),
-      imageProduct: json['image_product'],
+      imageProduct: json['image_url'],
       gender: json['gender'] ?? '',
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'nameProduct': nameProduct,
+      'price': price,
+      'imageProduct': imageProduct,
+      'description': description,
+      'gender': gender,
+    };
   }
 }

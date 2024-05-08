@@ -26,7 +26,7 @@ class Navbar extends StatelessWidget {
                 ),
                 Gap(6),
                 Text(
-                  'Script Shoes App', style: TextStyle(color: Color(0xFF4F4FEC) , fontWeight: FontWeight.bold, fontSize: 20),
+                  'Script Shoes Store', style: TextStyle(color: Color(0xFF4F4FEC) , fontWeight: FontWeight.bold, fontSize: 20),
                 )
               ],
             ),

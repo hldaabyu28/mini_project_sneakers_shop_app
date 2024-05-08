@@ -5,10 +5,17 @@ class IntroPage2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
-      body: Center(
-        child: Text('Intro Page 2'),
-      ),
+      backgroundColor: Color(0xFFF5F3FA),
+       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+         Center(child: Image.asset('assets/images/Asset 2-8.png', width: 250, height: 250,)),
+         
+        ],
+      )
     );
   }
 }

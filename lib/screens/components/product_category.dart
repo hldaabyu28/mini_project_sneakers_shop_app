@@ -37,7 +37,7 @@ class ProductCategory extends StatelessWidget {
             crossAxisCount: 2,
             mainAxisSpacing: 10,
             crossAxisSpacing: 10,
-            childAspectRatio: 12 / 20,
+            childAspectRatio: 12 / 18,
           ),
           shrinkWrap: true,
           itemCount: latestProducts.length,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class IntroPage1 extends StatelessWidget {
   const IntroPage1({Key? key}) : super(key: key);
@@ -6,19 +7,13 @@ class IntroPage1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF5F3FA),
+      backgroundColor: Color(0xFFDBDBEE),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset('assets/images/nike1.png' , alignment: Alignment.center,),
-          Text('Welcome to Script Store App',
-
-          textAlign: TextAlign.center, 
-          style: TextStyle(
-            color: Colors.black, 
-            fontSize: 20 , 
-            height: 0), ),
+         Center(child: Image.asset('assets/images/Asset 3-8.png', width: 300, height: 300,)),
+         
         ],
       )
       

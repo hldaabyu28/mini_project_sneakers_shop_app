@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mini_project_shoes_app/controllers/auth_controller.dart';
 import 'package:mini_project_shoes_app/controllers/bottom_nav_controller.dart';
+import 'package:mini_project_shoes_app/controllers/cart_controller.dart';
 import 'package:mini_project_shoes_app/controllers/product_controller.dart';
 
-import 'package:mini_project_shoes_app/main_screens.dart';
+import 'package:mini_project_shoes_app/screens/main_screens.dart';
 import 'package:mini_project_shoes_app/screens/cartpage.dart';
 import 'package:mini_project_shoes_app/screens/login.dart';
 import 'package:mini_project_shoes_app/screens/onboarding.dart';
+import 'package:mini_project_shoes_app/screens/register.dart';
 import 'package:mini_project_shoes_app/screens/splash_page.dart';
 
 import 'package:mini_project_shoes_app/screens/searchpage.dart';
@@ -26,6 +29,9 @@ class MyApp extends StatelessWidget {
       providers:[
         ChangeNotifierProvider(create: (context) => ProductController()),
         ChangeNotifierProvider(create: (context) => BottomNavBarProvider()),
+        ChangeNotifierProvider(create: (context) => AuthController()),
+        ChangeNotifierProvider(create: (context) => CartController()),
+
       ],
       child: MaterialApp(
         theme: ThemeData(
@@ -37,7 +43,7 @@ class MyApp extends StatelessWidget {
         
         debugShowCheckedModeBanner: false,
         home: SplashPage(),
-        initialRoute: '/splashpage',
+        initialRoute: '/splashpage' ,
         routes: {
           '/mainscreen': (context) => MainScreen(),
           '/homepage': (context) => HomePage(),
@@ -47,6 +53,7 @@ class MyApp extends StatelessWidget {
           '/onboarding': (context) => OnBoardingPage(),
           '/login': (context) => LoginPage(),
           '/splashpage': (context) => SplashPage(),
+          '/register': (context) => RegisterPage(),
         },
       ), 
     );

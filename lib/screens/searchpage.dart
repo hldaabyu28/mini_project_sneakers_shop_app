@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mini_project_shoes_app/screens/components/product_card.dart'; // Import ProductCard
 import 'package:mini_project_shoes_app/controllers/product_controller.dart';
 import 'package:provider/provider.dart';
+
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
 
@@ -16,16 +17,19 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
-    _searchController = TextEditingController(); // Initialize _searchController here
+    _searchController = TextEditingController();
     productController = Provider.of<ProductController>(context, listen: false);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFE0DEEB),
       appBar: AppBar(
-        backgroundColor: Colors.green,
-        title: Text("Search Product"),
+        backgroundColor: Color(0xFF4F4FEC),
+        title: Text("Search Product" ,
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
       ),
       body: Column(
@@ -35,7 +39,6 @@ class _SearchPageState extends State<SearchPage> {
             child: TextField(
               controller: _searchController,
               onChanged: (value) {
-                // Call search method of productController when text changes
                 productController.searchProductsByName(value);
               },
               decoration: InputDecoration(
@@ -50,17 +53,21 @@ class _SearchPageState extends State<SearchPage> {
           Expanded(
             child: Consumer<ProductController>(
               builder: (context, productController, _) {
-                // Check if products are loaded and not empty
                 if (productController.isLoaded &&
                     productController.products.isNotEmpty) {
-                  return ListView.builder(
+                  return GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, // Jumlah kolom dalam GridView
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      childAspectRatio: 12 / 18,
+                    ),
                     itemCount: productController.products.length,
                     itemBuilder: (context, index) {
                       return ProductCard(productController.products[index]);
                     },
                   );
                 } else {
-                  // Show a message if no products found or still loading
                   return Center(
                     child: Text(
                       productController.isLoaded

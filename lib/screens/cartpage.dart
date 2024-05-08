@@ -1,85 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:mini_project_shoes_app/controllers/cart_controller.dart';
+import 'package:provider/provider.dart';
 
-class CartPage extends StatefulWidget {
-  const CartPage({super.key});
-
-  @override
-  State<CartPage> createState() => _CartPageState();
-}
-
-class _CartPageState extends State<CartPage> {
-  int _quantity = 1;
-  double _totalPrice = 1500000;
-
+class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final cartController = Provider.of<CartController>(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cart Page'),
+        title: Text('Cart'),
       ),
-      body: Container(
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding: EdgeInsets.all(10),
-                    margin: EdgeInsets.all(10),
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.green,
-                    ),
-                    child: ListTile(
-                      title: Text('Sepatu Nike Air Max 270'),
-                      subtitle: Text('Rp ${_totalPrice.toStringAsFixed(2)}'), // Update subtitle with total price
-                      leading: Image.asset('assets/images/shoes.png'),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            onPressed: () => setState(() {
-                              if (_quantity > 1) {
-                                _quantity--;
-                                _totalPrice -= 1500000; // Decrement total price for each item removed
-                              }
-                            }),
-                            icon: Icon(Icons.remove),
-                          ),
-                          Text('$_quantity'),
-                          IconButton(
-                            onPressed: () => setState(() {
-                              _quantity++;
-                              _totalPrice += 1500000; // Increment total price for each item added
-                            }),
-                            icon: Icon(Icons.add),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-                itemCount: 10,
-              ),
+      body: ListView.builder(
+        itemCount: cartController.cartItems.length,
+        itemBuilder: (context, index) {
+          final item = cartController.cartItems[index];
+          return ListTile(
+            title: Text(item['product_name']),
+            subtitle: Text('Price: ${item['product_price']}'),
+            trailing: IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () {
+                cartController.removeItemFromCart(item['id']);
+              },
             ),
-            Container(
-              color: Colors.transparent,
-              child: SizedBox(
-                height: 50,
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Implement checkout functionality here
-                    // This function will be called when the checkout button is pressed
-                    // You can navigate to the checkout page or perform any other action you want.
-                  },
-                  child: Text('Checkout'),
-                ),
-              ),
-            )
-          ],
-        ),
+          );
+        },
       ),
     );
   }

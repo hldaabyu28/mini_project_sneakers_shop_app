@@ -17,7 +17,6 @@ class _ChatPageState extends State<ChatPage> {
         title: Text('Chat Page'),
       ),
       
-     
     );  
   }
 }

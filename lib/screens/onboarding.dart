@@ -43,7 +43,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               onTap: (){
                 _controller.jumpToPage(2);
               },
-              child: Text ('Skip'),
+              child: Text ('Skip' ,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF4F4FEC),
+              
+                ),),
             ),
             
             SmoothPageIndicator(controller: _controller, count: 3),
@@ -52,7 +57,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               onTap: (){
                 Navigator.popAndPushNamed(context, '/login');
               },
-              child: Text ('done'),
+              child: Text ('Done' , 
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF4F4FEC),
+                ),),
             )
              : GestureDetector(
               onTap: (){
@@ -60,7 +69,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   duration: Duration(milliseconds: 500), 
                   curve: Curves.easeIn);
               },
-              child: Text ('Next'),
+              child: Text ('Next' , 
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF4F4FEC),
+                
+                ),),
             ),
            
           ],
