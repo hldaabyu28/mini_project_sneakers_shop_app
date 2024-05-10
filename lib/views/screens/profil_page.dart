@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project_shoes_app/controllers/auth_controller.dart';
+import 'package:mini_project_shoes_app/views/login.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -45,7 +46,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 // Call logout method
                 authController.logout();
                 // Navigate to login screen
-                Navigator.pushReplacementNamed(context, '/login');
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginPage()), (route) => false);
+                
               },
               child: Text('Logout'),
             ),

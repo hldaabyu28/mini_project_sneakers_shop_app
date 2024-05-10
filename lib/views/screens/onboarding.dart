@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project_shoes_app/screens/widgets/intropage1.dart';
-import 'package:mini_project_shoes_app/screens/widgets/intropage2.dart';
-import 'package:mini_project_shoes_app/screens/widgets/intropage3.dart';
+import 'package:mini_project_shoes_app/views/widgets/intropage1.dart';
+import 'package:mini_project_shoes_app/views/widgets/intropage2.dart';
+import 'package:mini_project_shoes_app/views/widgets/intropage3.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 

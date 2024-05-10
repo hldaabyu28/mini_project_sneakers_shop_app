@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:mini_project_shoes_app/controllers/auth_controller.dart';
-import 'package:mini_project_shoes_app/screens/main_screens.dart';
+import 'package:mini_project_shoes_app/views/main_screens.dart';
 import 'package:provider/provider.dart';
 
 // Import statements...
@@ -25,10 +25,14 @@ class _LoginPageState extends State<LoginPage> {
     passwordController.dispose();
     super.dispose();
   }
-  
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final authController = Provider.of<AuthController>(context, listen: false); 
    
 
     return Scaffold(
@@ -36,7 +40,6 @@ class _LoginPageState extends State<LoginPage> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            key: _formKey,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
@@ -45,7 +48,11 @@ class _LoginPageState extends State<LoginPage> {
                 height: 150,
               ),
               Gap(6),
-              TextFormField(
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
                 controller: emailController,
                 decoration: InputDecoration(
                   hintText: "Email",
@@ -93,47 +100,33 @@ class _LoginPageState extends State<LoginPage> {
               ElevatedButton(
                 
                   onPressed: () async {
-                    if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-                      setState(() {
-                        isLoading = true;
-                      });
+                    String email = emailController.text.trim();
+                    String password = passwordController.text.trim();
 
-                      print('Email: ${emailController.text}');
-                      
-                      try {
-                        // Attempt to login using the provided email and password
-                        await Provider.of<AuthController>(context, listen: false)
-                            .login(emailController.text, passwordController.text);
-                        
-                        // If login is successful, navigate to the main screen
-                        Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                            builder: (context) => MainScreen(),
-                          ),
-                          (Route<dynamic> route) => false,
-                        );
-                      } catch (e) {
-                        // If an error occurs during login
-                        print('Error logging in: $e');
-                        
-                        // Show a snackbar or display an error message to the user
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('An error occurred. Please try again later.'),
-                            backgroundColor: Colors.red,
-                          ),
-                        );
-                      } finally {
-                        setState(() {
-                          isLoading = false;
-                        });
-                      }
-                    }
+                if (email.isNotEmpty && password.isNotEmpty) {
+                  try {
+                    await authController.login(email, password);
+                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen()), (route) => false);
+                  } catch (e) {
+                    // Show error message to user
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Registration failed: $e')),
+                    );
+                  }
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Email and password cannot be empty')),
+                  );
+                }
+                    
                   },
                   child: isLoading ? CircularProgressIndicator() : Text('Login'),
                 ),
   
 
+                  ],
+                )
+              ),
               Gap(6),
               Text(
                 'Don\'t have an account?',

@@ -57,7 +57,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 if (email.isNotEmpty && password.isNotEmpty) {
                   try {
                     await authController.signup(email, password);
-                    // Navigate to login page or main app screen after successful registration
                     Navigator.pushReplacementNamed(context, '/login');
                   } catch (e) {
                     // Show error message to user

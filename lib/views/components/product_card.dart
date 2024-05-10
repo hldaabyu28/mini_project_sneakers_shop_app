@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project_shoes_app/controllers/cart_controller.dart';
-import 'package:mini_project_shoes_app/screens/widgets/detail_product.dart';
+import 'package:mini_project_shoes_app/views/widgets/detail_product.dart';
 import 'package:mini_project_shoes_app/models/product_model.dart';
 import 'package:provider/provider.dart';
 
@@ -32,6 +32,7 @@ class ProductCard extends StatelessWidget {
                     productPrice: double.parse(product.price),
                     productImage: product.imageProduct ?? '',
                     productDescription: product.description ,
+                
                   ),
                 ),
               );
@@ -91,7 +92,14 @@ class ProductCard extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        cartController.addItemToCart(product.toMap());
+                        cartController.addToCart(product);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('${product.nameProduct} added to cart'),
+                  duration: Duration(seconds: 2),
+                ),
+              );
+                       
                       },
                       child: Container(
                         decoration: BoxDecoration(

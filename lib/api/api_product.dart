@@ -27,20 +27,36 @@ class ApiProduct {
   }
 
 Future searchProductsByName(String keyword) async {
-  var baseUrl = '${_baseUrl}product?select=*&name=cs.ilike.$keyword';
-  final response = await _dio.get(
-    baseUrl,
-    options: Options(
-      headers: {
-        'apikey': _apiKey,
-        'Authorization': 'Bearer $_apiKey',
-        'prefer': 'return=representation'
-      },
-    ),
-  );
-  print('print response${response.toString()}');
-  return response;
+  var baseUrl = '${_baseUrl}product?select=*&q=name_product.eq.$keyword';
+  
+  try {
+    final response = await _dio.get(
+      baseUrl,
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $_apiKey',
+          'prefer': 'return=representation'
+        },
+      ),
+    );
+    print('print response${response.toString()}');
+
+    // Periksa status respons
+    if (response.statusCode == 200) {
+      print('Response: ${response.data}');
+      return response.data;
+    } else {
+      // Tangani kesalahan jika respons tidak berhasil
+      print('Failed to load data, status code: ${response.statusCode}');
+      throw Exception('Failed to load data');
+    }
+  } catch (e) {
+    // Tangani kesalahan jaringan atau lainnya
+    print('Error: $e');
+    throw Exception('Error occurred: $e');
+  }
 }
+
 
 }
 

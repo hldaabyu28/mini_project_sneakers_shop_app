@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project_shoes_app/screens/components/product_card.dart';
+import 'package:mini_project_shoes_app/views/components/product_card.dart';
 import 'package:mini_project_shoes_app/controllers/product_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +28,12 @@ class ProductCategory extends StatelessWidget {
                   fontWeight: FontWeight.w500
                 )
               ),
-            )
+            ),
+            Spacer(),
+            IconButton(onPressed: (){
+              productController.getProducts();
+            }, 
+            icon: Icon(Icons.refresh_outlined)),
           ],
         ),
         GridView.builder(

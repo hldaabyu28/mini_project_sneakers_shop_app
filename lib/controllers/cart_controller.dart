@@ -1,45 +1,69 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project_shoes_app/api/api_cart.dart';
+import 'package:mini_project_shoes_app/models/product_model.dart';
 
 class CartController extends ChangeNotifier {
-  final CartApi _cartApi = CartApi();
-  List<Map<String, dynamic>> _cartItems = [];
+  List<ProductModel> _cartItems = [];
 
-  // Getter to retrieve the current list of cart items
-  List<Map<String, dynamic>> get cartItems => _cartItems;
+  // Getter untuk mendapatkan daftar item di keranjang
+  List<ProductModel> get cartItems => _cartItems;
 
-  // Method to add an item to the cart
-  Future<void> addItemToCart(Map<String, dynamic> item) async {
-    try {
-      await _cartApi.addItemToCart(item);
-      _cartItems.add(item); // Add the item locally to update UI immediately
+
+void addToCart(ProductModel product) {
+  final existingProductIndex = _cartItems.indexWhere((item) => item.id == product.id);
+  if (existingProductIndex != -1) {
+    // Jika produk sudah ada di keranjang, lakukan increment
+    incrementQuantity(_cartItems[existingProductIndex]);
+  } else {
+    // Jika produk belum ada di keranjang, tambahkan ke keranjang
+    _cartItems.add(product);
+    notifyListeners(); // Memberi tahu listener bahwa ada perubahan pada keranjang
+  }
+}
+
+  // Metode untuk menghapus produk dari keranjang berdasarkan indeks
+  void removeFromCart(int index) {
+    _cartItems.removeAt(index);
+    notifyListeners(); // Memberi tahu listener bahwa ada perubahan pada keranjang
+  }
+
+  // Metode untuk menghapus semua produk dari keranjang
+  void clearCart() {
+    _cartItems.clear();
+    notifyListeners(); // Memberi tahu listener bahwa ada perubahan pada keranjang
+  }
+
+  // Metode untuk menambahkan jumlah produk di keranjang
+  void incrementQuantity(ProductModel product) {
+    final index = _cartItems.indexOf(product);
+    if (index != -1) {
+      _cartItems[index] = product.copyWith(quantity: product.quantity + 1);
       notifyListeners();
-    } catch (e) {
-      print('Failed to add item to cart: $e');
-      // Handle the error
     }
   }
 
-  // Method to retrieve all items in the cart
-  Future<void> fetchCartItems() async {
-    try {
-      _cartItems = await _cartApi.getCartItems();
+  // Metode untuk mengurangi jumlah produk di keranjang
+  void decrementQuantity(ProductModel product) {
+    final index = _cartItems.indexOf(product);
+    if (index != -1 && product.quantity > 1) {
+      _cartItems[index] = product.copyWith(quantity: product.quantity - 1);
       notifyListeners();
-    } catch (e) {
-      print('Failed to fetch cart items: $e');
-      // Handle the error
     }
   }
 
-  // Method to remove an item from the cart
-  Future<void> removeItemFromCart(int itemId) async {
-    try {
-      await _cartApi.removeItemFromCart(itemId);
-      _cartItems.removeWhere((item) => item['id'] == itemId); // Remove the item locally to update UI immediately
-      notifyListeners();
-    } catch (e) {
-      print('Failed to remove item from cart: $e');
-      // Handle the error
+  // Metode untuk mendapatkan jumlah produk di keranjang
+  int getItemCount(ProductModel product) {
+    final index = _cartItems.indexOf(product);
+    if (index != -1) {
+      return _cartItems[index].quantity;
     }
+    return 0;
+  }
+
+  double totalPrice() {
+    double total = 0;
+    for (var item in _cartItems) {
+      total += double.parse(item.price) * item.quantity; // Mengalikan harga dengan jumlah
+    }
+    return total;
   }
 }

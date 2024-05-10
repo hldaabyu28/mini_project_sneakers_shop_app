@@ -218,28 +218,30 @@ class ProductController extends ChangeNotifier {
  
 
   Future<void> searchProductsByName(String keyword) async {
-    try {
-      final response = await _apiProduct.searchProductsByName(keyword);
+    print('Search by name keyword: $keyword');
+  try {
+    final response = await _apiProduct.searchProductsByName(keyword);
 
-      if (response != null && response.statusCode == 200) {
-        _products.clear();
-        final List<dynamic> responseData = response.data;
-        responseData.forEach((item) {
-          final product = ProductModel.fromJson(item);
-          _products.add(product);
-        });
+    if (response != null && response.statusCode == 200) {
+      _products.clear();
+      final List<dynamic> responseData = response.data;
+      responseData.forEach((item) {
+        final product = ProductModel.fromJson(item);
+        _products.add(product);
+      });
 
-        print('Search by name successful');
-      } else {
-        print('Failed to search products by name. Status code: ${response?.statusCode}');
-      }
-    } catch (e) {
-      print('Error: $e');
-    } finally {
-      _isLoaded = true; // Only update status if request is completed
-      notifyListeners();
+      print('Search by name successful');
+    } else {
+      print('Failed to search products by name. Status code: ${response?.statusCode}');
     }
+  } catch (e) {
+    print('Error: $e');
+  } finally {
+    _isLoaded = true; 
+    notifyListeners();
   }
+}
+
 
 }
 

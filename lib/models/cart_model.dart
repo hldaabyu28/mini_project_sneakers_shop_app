@@ -1,51 +1,22 @@
+import 'package:mini_project_shoes_app/models/product_model.dart';
+
 class CartItem {
-  int id;
-  int productId;
-  String productName;
-  double productPrice;
-  String? productImage;
-  String? size;
-  String? color;
-  int? quantity;
-  String createdAt;
+  final int id;
+  final ProductModel product;
+  late final int quantity;
 
-  CartItem({
-    required this.id,
-    required this.productId,
-    required this.productName,
-    required this.productPrice,
-    this.productImage,
-    this.size,
-    this.color,
-    this.quantity,
-    required this.createdAt,
-  });
+  CartItem({required this.id, required this.product, required this.quantity, required productId});
 
-  factory CartItem.fromJson(Map<String, dynamic> json) {
-    return CartItem(
-      id: json['id'],
-      productId: json['product_id'],
-      productName: json['product_name'],
-      productPrice: json['product_price'].toDouble(),
-      productImage: json['product_image'],
-      size: json['size'],
-      color: json['color'],
-      quantity: json['quantity'],
-      createdAt: json['created_at'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
+  Map<String, Object?> toMap() {
     return {
       'id': id,
-      'product_id': productId,
-      'product_name': productName,
-      'product_price': productPrice,
-      'product_image': productImage,
-      'size': size,
-      'color': color,
+      'productId': product.id,
       'quantity': quantity,
-      'created_at': createdAt,
     };
+    
+  }
+
+  static fromMap(Map<String, Object?> json) {
+    
   }
 }

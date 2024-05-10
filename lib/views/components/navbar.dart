@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:mini_project_shoes_app/screens/cartpage.dart';
+import 'package:mini_project_shoes_app/views/widgets/cartpage.dart';
 
 
 class Navbar extends StatelessWidget {

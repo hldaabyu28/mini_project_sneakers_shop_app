@@ -5,18 +5,19 @@ import 'package:mini_project_shoes_app/controllers/bottom_nav_controller.dart';
 import 'package:mini_project_shoes_app/controllers/cart_controller.dart';
 import 'package:mini_project_shoes_app/controllers/product_controller.dart';
 
-import 'package:mini_project_shoes_app/screens/main_screens.dart';
-import 'package:mini_project_shoes_app/screens/cartpage.dart';
-import 'package:mini_project_shoes_app/screens/login.dart';
-import 'package:mini_project_shoes_app/screens/onboarding.dart';
-import 'package:mini_project_shoes_app/screens/register.dart';
-import 'package:mini_project_shoes_app/screens/splash_page.dart';
+import 'package:mini_project_shoes_app/views/main_screens.dart';
+import 'package:mini_project_shoes_app/views/widgets/cartpage.dart';
+import 'package:mini_project_shoes_app/views/login.dart';
+import 'package:mini_project_shoes_app/views/screens/onboarding.dart';
+import 'package:mini_project_shoes_app/views/register.dart';
+import 'package:mini_project_shoes_app/views/widgets/splash_page.dart';
 
-import 'package:mini_project_shoes_app/screens/searchpage.dart';
+import 'package:mini_project_shoes_app/views/screens/searchpage.dart';
 import 'package:provider/provider.dart';
-import 'screens/homepage.dart';
+import 'views/screens/homepage.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

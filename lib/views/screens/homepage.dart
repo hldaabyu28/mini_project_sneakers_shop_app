@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
-import 'package:mini_project_shoes_app/screens/components/product_card.dart';
+import 'package:mini_project_shoes_app/views/components/product_card.dart';
 
-import 'package:mini_project_shoes_app/screens/components/image_slider.dart';
-import 'package:mini_project_shoes_app/screens/components/navbar.dart';
-import 'package:mini_project_shoes_app/screens/components/product_category.dart';
+import 'package:mini_project_shoes_app/views/components/image_slider.dart';
+import 'package:mini_project_shoes_app/views/components/navbar.dart';
+import 'package:mini_project_shoes_app/views/components/new_product.dart';
 
 class HomePage extends StatefulWidget {
 

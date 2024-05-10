@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mini_project_shoes_app/screens/onboarding.dart';
+import 'package:mini_project_shoes_app/views/screens/onboarding.dart';
 class SplashPage extends StatefulWidget {
   @override
   _SplashPageState createState() => _SplashPageState();

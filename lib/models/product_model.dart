@@ -7,6 +7,8 @@ class ProductModel {
   final DateTime createdAt;
   final String? imageProduct;
   final String gender;
+  int quantity = 1; // Tambahkan quantity dengan nilai default 1
+ 
 
   ProductModel({
     required this.id,
@@ -17,6 +19,8 @@ class ProductModel {
     required this.createdAt,
     this.imageProduct,
     required this.gender,
+    this.quantity = 1,
+   
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -29,16 +33,25 @@ class ProductModel {
       createdAt: DateTime.parse(json['created_at'] ?? ''),
       imageProduct: json['image_url'],
       gender: json['gender'] ?? '',
+      
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'nameProduct': nameProduct,
-      'price': price,
-      'imageProduct': imageProduct,
-      'description': description,
-      'gender': gender,
-    };
+
+  ProductModel copyWith({int? quantity}) {
+    return ProductModel(
+      id: this.id,
+      categoryId: this.categoryId,
+      nameProduct: this.nameProduct,
+      description: this.description,
+      price: this.price,
+      createdAt: this.createdAt,
+      imageProduct: this.imageProduct,
+      gender: this.gender,
+      quantity: quantity ?? this.quantity, // Gunakan nilai quantity yang baru, atau nilai default
+      
+    );
   }
+
+  
 }

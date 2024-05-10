@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project_shoes_app/screens/components/product_card.dart'; // Import ProductCard
+import 'package:mini_project_shoes_app/views/components/product_card.dart';
 import 'package:mini_project_shoes_app/controllers/product_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -11,23 +11,24 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  late TextEditingController _searchController;
+  TextEditingController _searchController = TextEditingController();
   late ProductController productController;
 
   @override
   void initState() {
     super.initState();
-    _searchController = TextEditingController();
-    productController = Provider.of<ProductController>(context, listen: false);
+  
   }
 
   @override
   Widget build(BuildContext context) {
+    productController = Provider.of<ProductController>(context, listen: false);
     return Scaffold(
       backgroundColor: Color(0xFFE0DEEB),
       appBar: AppBar(
         backgroundColor: Color(0xFF4F4FEC),
-        title: Text("Search Product" ,
+        title: Text(
+          "Search Product",
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
@@ -57,7 +58,7 @@ class _SearchPageState extends State<SearchPage> {
                     productController.products.isNotEmpty) {
                   return GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, // Jumlah kolom dalam GridView
+                      crossAxisCount: 2,
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
                       childAspectRatio: 12 / 18,
@@ -70,9 +71,7 @@ class _SearchPageState extends State<SearchPage> {
                 } else {
                   return Center(
                     child: Text(
-                      productController.isLoaded
-                          ? "No products found"
-                          : "Loading...",
+                      productController.isLoaded ? "No products found" : "Loading...",
                     ),
                   );
                 }
