@@ -43,11 +43,6 @@ class BottomNavBar extends StatelessWidget {
             icon: Icons.chat_outlined,
             text: 'Chat',
           ),
-      
-          GButton(
-            icon: Icons.person_outline,
-            text: 'Profile',
-          ),
         ],
       ),
     );

@@ -1,11 +1,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:mini_project_shoes_app/helpers/database.dart';
+import 'package:mini_project_shoes_app/views/login.dart';
 import 'package:mini_project_shoes_app/views/widgets/cartpage.dart';
+import 'package:mini_project_shoes_app/views/widgets/splash_page.dart';
+
 
 
 class Navbar extends StatelessWidget {
-  const Navbar({Key? key}) : super(key: key);
+  Navbar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,7 @@ class Navbar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Welcome, Dani', style: TextStyle(color: Color(0xFF4F4FEC), fontSize: 20 ),
+                  'Welcome', style: TextStyle(color: Color(0xFF4F4FEC), fontSize: 20 ),
                 ),
                 Gap(6),
                 Text(
@@ -35,6 +39,12 @@ class Navbar extends StatelessWidget {
                IconButton(onPressed: (){
                  Navigator.push(context, MaterialPageRoute(builder: (context)=> CartPage()));
                }, icon: Icon(Icons.shopping_cart_outlined)),
+        
+                IconButton(onPressed: ()async{
+                  await DatabaseHelper().logout();
+                   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => SplashPage()), (route) => false);
+
+                }, icon: Icon(Icons.logout_outlined)),
               ],
             ),
           ],

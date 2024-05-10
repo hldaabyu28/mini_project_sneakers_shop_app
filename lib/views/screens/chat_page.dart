@@ -19,7 +19,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chat Page', style: TextStyle(color: Colors.white)),
+        title: Text('Chat Bot AI', style: TextStyle(color: Colors.white)),
         backgroundColor: Color(0xFF4F4FEC),
         centerTitle: true,
         actions: [
@@ -135,7 +135,7 @@ class _ChatPageState extends State<ChatPage> {
               "content": _messageController.text.trim(),
             }
           ],
-          'max_tokens': 50,
+          'max_tokens': 250,
         },
       ),
     );
@@ -156,7 +156,7 @@ class _ChatPageState extends State<ChatPage> {
 
   // Function to check if user message contains keywords related to shoes
   bool _containsShoeKeywords(String message) {
-    final shoeKeywords = ['harga', 'produk', 'merk', 'ukuran', 'warna', 'sepatu'];
+    final shoeKeywords = ['harga', 'produk', 'merk', 'ukuran', 'warna', 'sepatu', 'sepatu', 'shoes', 'shoes'];
     for (String keyword in shoeKeywords) {
       if (message.toLowerCase().contains(keyword)) {
         return true;

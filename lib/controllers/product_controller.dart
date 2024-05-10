@@ -173,7 +173,7 @@
 // }
 
 import 'package:flutter/material.dart';
-import 'package:mini_project_shoes_app/api/api_product.dart';
+import 'package:mini_project_shoes_app/models/api/api_product.dart';
 import 'package:mini_project_shoes_app/models/product_model.dart';
 
 class ProductController extends ChangeNotifier {

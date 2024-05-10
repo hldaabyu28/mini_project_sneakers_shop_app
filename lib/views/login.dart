@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:mini_project_shoes_app/controllers/auth_controller.dart';
+import 'package:mini_project_shoes_app/helpers/database.dart';
+import 'package:mini_project_shoes_app/models/user_model.dart';
 import 'package:mini_project_shoes_app/views/main_screens.dart';
-import 'package:provider/provider.dart';
+
 
 // Import statements...
 
@@ -14,27 +15,33 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController emailController = TextEditingController();
+  TextEditingController UsernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  bool isLoading = false;
+  bool isVisible = false;
+  bool isLoginTrue = true;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
+  final db = DatabaseHelper();
+  login() async {
+    var response = await db
+        .login(Users(usrName: UsernameController.text , usrPassword: passwordController.text));
+    if (response == true) {
+      //If login is correct, then goto notes
+      if (!mounted) return;
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => MainScreen()));
+    } else {
+      //If not, true the bool value to show error message
+      setState(() {
+        isLoginTrue = true;
+      });
+    }
   }
-  @override
-  void initState() {
-    super.initState();
-  }
+
+
 
   @override
   Widget build(BuildContext context) {
-    final authController = Provider.of<AuthController>(context, listen: false); 
-   
-
     return Scaffold(
       body: Center(
         child: Padding(
@@ -53,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   children: [
                     TextFormField(
-                controller: emailController,
+                controller: UsernameController,
                 decoration: InputDecoration(
                   hintText: "Email",
                   border: OutlineInputBorder(
@@ -65,12 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                   prefixIcon: const Icon(Icons.person),
                 ),
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
-                  } else if (!value.contains('@')) {
-                    return 'Please enter a valid email';
-                  } 
-                  return null;
+               
                 },
               ),
               const SizedBox(height: 20),
@@ -84,44 +86,67 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   fillColor: Color(0xFF4F4FEC).withOpacity(0.1),
                   filled: true,
-                  prefixIcon: const Icon(Icons.password),
+                  suffixIcon: IconButton(
+                    icon: Icon(isVisible ? Icons.visibility : Icons.visibility_off),
+                    onPressed: () {
+                      setState(() {
+                        isVisible = !isVisible;
+                      });
+                    },
+                  ),
+                  prefixIcon: const Icon(Icons.password),         
                 ),
-                obscureText: true,
+                obscureText: !isVisible,
+                
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
-                  } else if (value.length < 6) {
-                    return 'Password must be at least 6 characters';
-                  }
-                  return null;
+                     if (value!.isEmpty) {
+                          return "password is required";
+                        }
+                        return null;
+                 
                 },
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        login();
+                      }
                 
-                  onPressed: () async {
-                    String email = emailController.text.trim();
-                    String password = passwordController.text.trim();
-
-                if (email.isNotEmpty && password.isNotEmpty) {
-                  try {
-                    await authController.login(email, password);
-                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen()), (route) => false);
-                  } catch (e) {
-                    // Show error message to user
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Registration failed: $e')),
-                    );
-                  }
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Email and password cannot be empty')),
-                  );
-                }
+                
+                  //     String email = emailController.text.trim();
+                  //     String password = passwordController.text.trim();
+                
+                  // if (email.isNotEmpty && password.isNotEmpty) {
+                  //   try {
+                  //     await authController.login(email, password);
+                  //     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen()), (route) => false);
+                  //   } catch (e) {
+                  //     // Show error message to user
+                  //     ScaffoldMessenger.of(context).showSnackBar(
+                  //       SnackBar(content: Text('Registration failed: $e')),
+                  //     );
+                  //   }
+                  // } else {
+                  //   ScaffoldMessenger.of(context).showSnackBar(
+                  //     SnackBar(content: Text('Email and password cannot be empty')),
+                  //   );
+                  // }
+                      
+                    },
+                    child: Text('Login', style: TextStyle(color: Colors.white),),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF4F4FEC),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                    ),
                     
-                  },
-                  child: isLoading ? CircularProgressIndicator() : Text('Login'),
-                ),
+                  ),
+              ),
   
 
                   ],

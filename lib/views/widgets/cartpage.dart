@@ -111,7 +111,13 @@ class CartPage extends StatelessWidget {
                        
                       );
                     },
-                    child: Text('Checkout'),
+                    child: Text('Checkout' , style: TextStyle(color: Colors.white),),
+                    style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF4F4FEC),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
                   ),
                 ),
               ],

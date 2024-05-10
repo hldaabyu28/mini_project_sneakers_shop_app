@@ -3,7 +3,6 @@ import 'package:mini_project_shoes_app/views/components/bottom_nav.dart';
 import 'package:mini_project_shoes_app/controllers/bottom_nav_controller.dart';
 import 'package:mini_project_shoes_app/views/screens/chat_page.dart';
 import 'package:mini_project_shoes_app/views/screens/homepage.dart';
-import 'package:mini_project_shoes_app/views/screens/profil_page.dart';
 import 'package:mini_project_shoes_app/views/screens/searchpage.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +11,6 @@ class MainScreen extends StatelessWidget {
     HomePage(),
     SearchPage(),
     ChatPage(),
-    ProfilePage(),
   ];
 
   @override

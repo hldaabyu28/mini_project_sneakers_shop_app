@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mini_project_shoes_app/app_route.dart';
 import 'package:mini_project_shoes_app/controllers/auth_controller.dart';
 import 'package:mini_project_shoes_app/controllers/bottom_nav_controller.dart';
 import 'package:mini_project_shoes_app/controllers/cart_controller.dart';
 import 'package:mini_project_shoes_app/controllers/product_controller.dart';
 
-import 'package:mini_project_shoes_app/views/main_screens.dart';
-import 'package:mini_project_shoes_app/views/widgets/cartpage.dart';
-import 'package:mini_project_shoes_app/views/login.dart';
-import 'package:mini_project_shoes_app/views/screens/onboarding.dart';
-import 'package:mini_project_shoes_app/views/register.dart';
-import 'package:mini_project_shoes_app/views/widgets/splash_page.dart';
-
-import 'package:mini_project_shoes_app/views/screens/searchpage.dart';
 import 'package:provider/provider.dart';
-import 'views/screens/homepage.dart';
+
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,19 +36,8 @@ class MyApp extends StatelessWidget {
 
         
         debugShowCheckedModeBanner: false,
-        home: SplashPage(),
         initialRoute: '/splashpage' ,
-        routes: {
-          '/mainscreen': (context) => MainScreen(),
-          '/homepage': (context) => HomePage(),
-          '/searchpage': (context) => SearchPage(),
-          '/cartpage': (context) => CartPage(),
-          '/splashpage': (context) => SplashPage(),
-          '/onboarding': (context) => OnBoardingPage(),
-          '/login': (context) => LoginPage(),
-          '/splashpage': (context) => SplashPage(),
-          '/register': (context) => RegisterPage(),
-        },
+        routes: AppRoutes.routes,
       ), 
     );
   }
