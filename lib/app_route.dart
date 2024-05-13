@@ -1,5 +1,7 @@
 // app_routes.dart
 import 'package:flutter/material.dart';
+import 'package:mini_project_shoes_app/views/admin/admin_home.dart';
+import 'package:mini_project_shoes_app/views/admin/widgets/add_product.dart';
 import 'package:mini_project_shoes_app/views/login.dart';
 import 'package:mini_project_shoes_app/views/main_screens.dart';
 import 'package:mini_project_shoes_app/views/register.dart';
@@ -20,5 +22,7 @@ class AppRoutes {
     '/onboarding': (context) => OnBoardingPage(),
     '/login': (context) => LoginPage(),
     '/register': (context) => RegisterPage(),
+    '/admin': (context) => AdminHome(),
+    '/addproduct': (context) => AddProduct(),
   };
 }

@@ -5,7 +5,7 @@ import 'package:mini_project_shoes_app/views/components/product_card.dart';
 
 import 'package:mini_project_shoes_app/views/components/image_slider.dart';
 import 'package:mini_project_shoes_app/views/components/navbar.dart';
-import 'package:mini_project_shoes_app/views/components/new_product.dart';
+import 'package:mini_project_shoes_app/views/components/product_category.dart';
 
 class HomePage extends StatefulWidget {
 

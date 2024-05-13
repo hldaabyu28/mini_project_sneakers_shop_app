@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project_shoes_app/models/product_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class CartController extends ChangeNotifier {
   List<ProductModel> _cartItems = [];

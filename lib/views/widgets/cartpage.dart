@@ -10,6 +10,7 @@ class CartPage extends StatelessWidget {
     final cartController = Provider.of<CartController>(context);
 
     return Scaffold(
+      backgroundColor: Color(0xFFF5F3FA),
       appBar: AppBar(
         title: Text('Cart', style: TextStyle(color: Colors.white),),
         centerTitle: true,
@@ -33,9 +34,8 @@ class CartPage extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          tileColor: index % 2 == 0 ? Color.fromRGBO(180, 180, 250, 1) : Color.fromARGB(255, 220, 214, 250),
-                          leading: SizedBox(
-                            
+                          tileColor: Color(0xFFDBDBEE),
+                          leading: SizedBox(  
                             width: 50,
                             height: 50,
                             child: product.imageProduct != null
@@ -45,8 +45,8 @@ class CartPage extends StatelessWidget {
                                   )
                                 : Placeholder(),
                           ),
-                          title: Text(product.nameProduct),
-                          subtitle: Text('IDR ${product.price}K'),
+                          title: Text(product.nameProduct , style: TextStyle(color: Color(0xFF4F4FEC), fontWeight: FontWeight.w800)),
+                          subtitle: Text('IDR ${product.price}K', style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w600)),
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -55,6 +55,8 @@ class CartPage extends StatelessWidget {
                                 onPressed: () {
                                   cartController.decrementQuantity(product);
                                 },
+                               
+                            
                               ),
                               Text(
                                 '${cartController.getItemCount(product)}',
@@ -65,6 +67,7 @@ class CartPage extends StatelessWidget {
                                 onPressed: () {
                                   cartController.incrementQuantity(product);
                                 },
+                                
                               ),
                               IconButton(
                                 icon: Icon(Icons.delete),
@@ -95,29 +98,32 @@ class CartPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      final checkoutController = CheckoutController(phoneNumber: '6288989408911');
-                      checkoutController.checkoutToWhatsApp(
-                       productName: cartController.cartItems
-                             .map((product) => '${product.nameProduct} (${cartController.getItemCount(product)})')
-                             .join(', '),
-                         quantity: cartController.cartItems.map((product) => product.quantity).reduce((a, b) => a + b),
-                        productPrice: cartController.totalPrice(),
-                       productImage: cartController.cartItems.map((product) => product.imageProduct ?? '').join(', '),
-
-                       
-                      );
-                    },
-                    child: Text('Checkout' , style: TextStyle(color: Colors.white),),
-                    style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF4F4FEC),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        final checkoutController = CheckoutController(phoneNumber: '6288989408911');
+                        checkoutController.checkoutToWhatsApp(
+                         productName: cartController.cartItems
+                               .map((product) => '${product.nameProduct} (${cartController.getItemCount(product)})')
+                               .join(', '),
+                           quantity: cartController.cartItems.map((product) => product.quantity).reduce((a, b) => a + b),
+                          productPrice: cartController.totalPrice(),
+                         productImage: cartController.cartItems.map((product) => product.imageProduct ?? '').join(', '),
+                  
+                         
+                        );
+                      },
+                      child: Text('Checkout' , style: TextStyle(color: Colors.white),),
+                      style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF4F4FEC),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
-                        ),
+                    ),
                   ),
                 ),
               ],

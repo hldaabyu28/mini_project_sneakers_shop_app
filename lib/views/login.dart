@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:mini_project_shoes_app/helpers/database.dart';
 import 'package:mini_project_shoes_app/models/user_model.dart';
+import 'package:mini_project_shoes_app/views/admin/admin_home.dart';
 import 'package:mini_project_shoes_app/views/main_screens.dart';
 
 
@@ -23,20 +24,30 @@ class _LoginPageState extends State<LoginPage> {
 
   final db = DatabaseHelper();
   login() async {
-    var response = await db
-        .login(Users(usrName: UsernameController.text , usrPassword: passwordController.text));
-    if (response == true) {
-      //If login is correct, then goto notes
+  var response = await db.login(Users(
+      usrName: UsernameController.text,
+      usrPassword: passwordController.text));
+
+  if (response == true) {
+    // Jika login benar, periksa apakah pengguna adalah admin
+    if (UsernameController.text == 'admin1' && passwordController.text == 'admin1') {
+      // Redirect ke halaman admin
       if (!mounted) return;
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => MainScreen()));
+      Navigator.pushAndRemoveUntil(
+          context, MaterialPageRoute(builder: (context) => AdminHome()), (route) => false);
     } else {
-      //If not, true the bool value to show error message
-      setState(() {
-        isLoginTrue = true;
-      });
+      if (!mounted) return;
+      Navigator.pushAndRemoveUntil(
+          context, MaterialPageRoute(builder: (context) => MainScreen()), (route) => false);
     }
+  } else {
+    // Jika login gagal, set nilai bool untuk menampilkan pesan kesalahan
+    setState(() {
+      isLoginTrue = true;
+    });
   }
+}
+
 
 
 
@@ -62,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                     TextFormField(
                 controller: UsernameController,
                 decoration: InputDecoration(
-                  hintText: "Email",
+                  hintText: "Username",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(18),
                     borderSide: BorderSide.none,

@@ -36,10 +36,6 @@ class Navbar extends StatelessWidget {
             ),
             Row(
               children: [
-               IconButton(onPressed: (){
-                 Navigator.push(context, MaterialPageRoute(builder: (context)=> CartPage()));
-               }, icon: Icon(Icons.shopping_cart_outlined)),
-        
                 IconButton(onPressed: ()async{
                   await DatabaseHelper().logout();
                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => SplashPage()), (route) => false);

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:mini_project_shoes_app/controllers/auth_controller.dart';
 import 'package:mini_project_shoes_app/helpers/database.dart';
 import 'package:mini_project_shoes_app/models/user_model.dart';
 import 'package:mini_project_shoes_app/views/login.dart';
-import 'package:provider/provider.dart'; // Import Gap for spacing
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -71,10 +69,20 @@ class _RegisterPageState extends State<RegisterPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(18),
                         borderSide: BorderSide.none,
+                        
                       ),
                       fillColor: Color(0xFF4F4FEC).withOpacity(0.1),
                       filled: true,
-                      prefixIcon: const Icon(Icons.password),
+                      suffixIcon: IconButton(
+                    icon: Icon(isVisible ? Icons.visibility : Icons.visibility_off),
+                    onPressed: () {
+                      setState(() {
+                        isVisible = !isVisible;
+                      });
+                    },
+                    ),
+                     prefixIcon: const Icon(Icons.password), 
+                      
                     ),
                     obscureText: true,
                     validator: (value) {
@@ -90,16 +98,26 @@ class _RegisterPageState extends State<RegisterPage> {
                    TextFormField(
                     controller: confirmPasswordController,
                     decoration: InputDecoration(
-                      hintText: "Password",
+                      hintText: "Confirm Password",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(18),
                         borderSide: BorderSide.none,
                       ),
                       fillColor: Color(0xFF4F4FEC).withOpacity(0.1),
                       filled: true,
-                      prefixIcon: const Icon(Icons.password),
+                      suffixIcon: IconButton(
+                    icon: Icon(isVisible ? Icons.visibility : Icons.visibility_off),
+                    onPressed: () {
+                      setState(() {
+                        isVisible = !isVisible;
+                      });
+                    },
                     ),
-                    obscureText: true,
+                     prefixIcon: const Icon(Icons.password), 
+                      
+                    ),
+                    
+                    obscureText: !isVisible,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your password';
@@ -119,6 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             db.signup(Users(
                               usrName: usernameController.text, 
                               usrPassword: passwordController.text
+
                               )).whenComplete(() {
                                   Navigator.push(
                                     context,MaterialPageRoute(builder: (context) => LoginPage())

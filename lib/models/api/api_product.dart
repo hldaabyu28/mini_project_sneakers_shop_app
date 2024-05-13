@@ -26,6 +26,54 @@ class ApiProduct {
 
   }
 
+   Future<Response> addProduct(Map<String, dynamic> newProductData) async {
+    var baseUrl = '${_baseUrl}product';
+    final response = await _dio.post(
+      baseUrl,
+      data: newProductData,
+      options: Options(
+        headers: {
+          'apikey': _apiKey,
+          'Authorization': 'Bearer $_apiKey',
+          'Content-Type': 'application/json',
+          'Prefer': 'return=representation',
+        },
+      ),
+    );
+    return response;
+  }
+
+  Future<Response> deleteProduct(int productId) async {
+    var baseUrl = '${_baseUrl}product?id=eq.$productId';
+    final response = await _dio.delete(
+      baseUrl,
+      options: Options(
+        headers: {
+          'apikey': _apiKey,
+          'Authorization': 'Bearer $_apiKey',
+        },
+      ),
+    );
+    return response;
+  }
+
+  Future<Response> updateBook(int productId, Map<String, dynamic> updatedBookData) async {
+    var baseUrl = '${_baseUrl}books?id=eq.$productId';
+    final response = await _dio.patch(
+      baseUrl,
+      data: updatedBookData,
+      options: Options(
+        headers: {
+          'apikey': _apiKey,
+          'Authorization': 'Bearer $_apiKey',
+          'Content-Type': 'application/json',
+          'Prefer': 'return=representation',
+        },
+      ),
+    );
+    return response;
+  }
+
 Future searchProductsByName(String keyword) async {
   var baseUrl = '${_baseUrl}product?select=*&q=name_product.eq.$keyword';
   

@@ -38,6 +38,22 @@ class ProductModel {
   }
 
 
+
+  Map <String, dynamic> toJson() {
+    return {
+      'id': id,
+      'category_id': categoryId,
+      'name_product': nameProduct,
+      'description': description,
+      'price': price, // Ubah tipe data dan konversi ke int
+      'created_at': createdAt.toIso8601String(),
+      'image_url': imageProduct,
+      'gender': gender,
+      
+    };
+  }
+
+
   ProductModel copyWith({int? quantity}) {
     return ProductModel(
       id: this.id,

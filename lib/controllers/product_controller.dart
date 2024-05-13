@@ -214,6 +214,44 @@ class ProductController extends ChangeNotifier {
     }
   }
 
+
+  void addProduct(Map<String, dynamic> newProductData) async {
+    print("Add Book Berhasil Dijalankan");
+    _isLoaded = true;
+    notifyListeners();
+    try {
+      final response = await _apiProduct.addProduct(newProductData);
+      if (response.statusCode == 201) {
+        print("Product Berhasil Ditambahkan");
+        getProducts();
+      }
+    } catch (e) {
+      debugPrint('Error: $e');
+    } finally {
+      _isLoaded = false;
+      notifyListeners();
+    }
+  }
+
+    void deleteProduct(int productId) async {
+    print("Delete Book Berhasil Dijalankan");
+    _isLoaded = true;
+    notifyListeners();
+    try {
+      final response = await _apiProduct.deleteProduct(productId);
+      if (response.statusCode == 204) {
+        print("Buku Berhasil Dihapus");
+        getProducts();
+      }
+    } catch (e) {
+      debugPrint('Error: $e');
+    } finally {
+      _isLoaded = false;
+      notifyListeners();
+    }
+  }
+
+
   /// Retrieves products by category ID from the API
  
 

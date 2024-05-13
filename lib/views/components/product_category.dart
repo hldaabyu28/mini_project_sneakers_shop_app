@@ -13,7 +13,11 @@ class ProductCategory extends StatelessWidget {
       productController.getProducts();
     }
 
-     final latestProducts = productController.products.reversed.toList().take(6);
+      final latestProducts = productController.products.toList()
+      ..sort((a, b) => b.id.compareTo(a.id));
+
+    // Mengambil 6 produk terbaru dari daftar yang sudah diurutkan
+    final latestProductsLimited = latestProducts.take(6).toList();
   
     return Column(
       children: [
@@ -45,9 +49,9 @@ class ProductCategory extends StatelessWidget {
             childAspectRatio: 12 / 18,
           ),
           shrinkWrap: true,
-          itemCount: latestProducts.length,
+          itemCount: latestProductsLimited.length,
           itemBuilder: (context, index) {
-             final product = latestProducts.elementAt(index);
+             final product = latestProductsLimited[index];
             return ProductCard(product);
           },
         ),

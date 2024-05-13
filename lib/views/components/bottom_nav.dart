@@ -43,6 +43,10 @@ class BottomNavBar extends StatelessWidget {
             icon: Icons.chat_outlined,
             text: 'Chat',
           ),
+          GButton(
+            icon: Icons.shopping_cart_outlined,
+            text: 'cart',
+          )
         ],
       ),
     );
