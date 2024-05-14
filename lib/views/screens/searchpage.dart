@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mini_project_shoes_app/models/product_model.dart';
 import 'package:mini_project_shoes_app/views/components/product_card.dart';
 import 'package:mini_project_shoes_app/controllers/product_controller.dart';
 import 'package:provider/provider.dart';
@@ -13,16 +14,17 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   TextEditingController _searchController = TextEditingController();
   late ProductController productController;
+  late List<ProductModel> allProducts; // Store all products here
 
   @override
   void initState() {
     super.initState();
-  
+    productController = Provider.of<ProductController>(context, listen: false);
+    allProducts = productController.products; // Initialize allProducts
   }
 
   @override
   Widget build(BuildContext context) {
-    productController = Provider.of<ProductController>(context, listen: false);
     return Scaffold(
       backgroundColor: Color(0xFFE0DEEB),
       appBar: AppBar(
@@ -39,8 +41,17 @@ class _SearchPageState extends State<SearchPage> {
             padding: EdgeInsets.all(20),
             child: TextField(
               controller: _searchController,
-              onChanged: (value) {
-                productController.searchProductsByName(value);
+              onChanged: (keyword) {
+                if (keyword.isEmpty) {
+                
+                  setState(() {
+                    productController.getProducts();
+                  });
+                } else {
+                  setState(() {
+                    productController.searchProducts(keyword);
+                  });
+                }
               },
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.search),
@@ -71,7 +82,9 @@ class _SearchPageState extends State<SearchPage> {
                 } else {
                   return Center(
                     child: Text(
-                      productController.isLoaded ? "No products found" : "Loading...",
+                      productController.isLoaded
+                          ? "No products found"
+                          : "Loading...",
                     ),
                   );
                 }

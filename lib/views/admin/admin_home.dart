@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mini_project_shoes_app/controllers/product_controller.dart';
 import 'package:mini_project_shoes_app/helpers/database.dart';
-import 'package:mini_project_shoes_app/views/admin/widgets/add_product.dart';
 import 'package:mini_project_shoes_app/views/admin/widgets/admin_product.dart';
 import 'package:mini_project_shoes_app/views/login.dart';
+import 'package:provider/provider.dart';
 
 class AdminHome extends StatefulWidget {
   const AdminHome({super.key});
@@ -14,11 +15,19 @@ class AdminHome extends StatefulWidget {
 class _AdminHomeState extends State<AdminHome> {
   @override
   Widget build(BuildContext context) {
+    final productController = Provider.of<ProductController>(context , listen: false);
     return Scaffold(
+      backgroundColor: Color(0xFFE0DEEB),
       appBar: AppBar(
-        title: Text('Admin Home'),
+        title: Text('Admin' , style: TextStyle(color: Colors.white),),
         centerTitle: true,
+        backgroundColor: Color(0xFF4F4FEC),
+        iconTheme: IconThemeData(color: Colors.white),
         actions: [
+          IconButton(onPressed: (){
+              productController.getProducts();
+          }, icon: Icon(Icons.refresh_outlined)),
+
           IconButton(
             onPressed: () async{
               await DatabaseHelper().logout();
@@ -26,9 +35,6 @@ class _AdminHomeState extends State<AdminHome> {
             },
             icon: Icon(Icons.logout),
           ),
-          IconButton(onPressed: (){
-            Navigator.pushNamed(context, '/addproduct');
-          }, icon: Icon(Icons.add)),
         ],
       ),
       body: SingleChildScrollView(
@@ -37,6 +43,13 @@ class _AdminHomeState extends State<AdminHome> {
             AdminProduct(),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.pushNamed(context, '/addproduct');
+        },
+        child: Icon(Icons.add, color: Colors.white),
+        backgroundColor: Color(0xFF4F4FEC),
       ),
       
     );

@@ -3,6 +3,7 @@ import 'package:mini_project_shoes_app/controllers/cart_controller.dart';
 import 'package:mini_project_shoes_app/views/widgets/detail_product.dart';
 import 'package:mini_project_shoes_app/models/product_model.dart';
 import 'package:provider/provider.dart';
+import 'package:quickalert/quickalert.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductModel product;
@@ -93,12 +94,15 @@ class ProductCard extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         cartController.addToCart(product);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('${product.nameProduct} added to cart'),
-                  duration: Duration(seconds: 2),
-                ),
-              );
+                        QuickAlert.show(
+                          context: context,
+                          confirmBtnColor: Color(0xFF4F4FEC),
+                          type: QuickAlertType.success,
+                          text: '${product.nameProduct} added to cart successfully',
+                         
+                          
+                        );
+                        
                        
                       },
                       child: Container(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mini_project_shoes_app/views/components/product_card.dart';
 import 'package:mini_project_shoes_app/controllers/product_controller.dart';
 import 'package:provider/provider.dart';
+import 'package:quickalert/quickalert.dart';
 
 class ProductCategory extends StatelessWidget {
   const ProductCategory({super.key});
@@ -25,8 +26,8 @@ class ProductCategory extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 24),
-              child: Text(
-                'New Products',
+              child: Text( key: Key('newProducts'),
+                'New Arrival',
                 style: TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.w500
@@ -36,6 +37,13 @@ class ProductCategory extends StatelessWidget {
             Spacer(),
             IconButton(onPressed: (){
               productController.getProducts();
+              QuickAlert.show(
+                context: context, 
+                type: QuickAlertType.loading,
+                title: 'Loading...',
+                text: 'Please wait while we are loading the latest products',
+               
+              );
             }, 
             icon: Icon(Icons.refresh_outlined)),
           ],

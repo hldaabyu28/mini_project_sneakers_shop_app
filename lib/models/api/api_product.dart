@@ -57,11 +57,11 @@ class ApiProduct {
     return response;
   }
 
-  Future<Response> updateBook(int productId, Map<String, dynamic> updatedBookData) async {
-    var baseUrl = '${_baseUrl}books?id=eq.$productId';
+  Future<Response> updateProduct(int productId, Map<String, dynamic> updatedProductData) async {
+    var baseUrl = '${_baseUrl}product?id=eq.$productId';
     final response = await _dio.patch(
       baseUrl,
-      data: updatedBookData,
+      data: updatedProductData,
       options: Options(
         headers: {
           'apikey': _apiKey,

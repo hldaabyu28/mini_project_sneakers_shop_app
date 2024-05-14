@@ -8,9 +8,9 @@ class ImageSlider extends StatefulWidget {
 
 class _ImageSliderState extends State<ImageSlider> {
   final List<String> _images = [
-    'assets/images/banner1.png',
-    'assets/images/banner2s.png',
-    'assets/images/banner2s.png',
+    'assets/images/slider2.png',
+    'assets/images/slider1.png',
+    'assets/images/slider3.png',
     
   ];
 
@@ -35,14 +35,5 @@ class _ImageSliderState extends State<ImageSlider> {
                 }
               ),
     );
-    // return Column(
-    //   children: [
-    //     Column(
-    //       children: [
-           
-    //       ],
-    //     ),
-    //   ],
-    // ); 
   }
 }

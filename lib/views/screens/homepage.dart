@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding: const EdgeInsets.only(left: 24),
               child: Text(
-                'Promo',
+                'Special Offers',
                 style: TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.w500

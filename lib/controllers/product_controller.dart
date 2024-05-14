@@ -1,176 +1,4 @@
-// import 'package:flutter/material.dart';
-// import 'package:mini_project_shoes_app/models/products/api/api_product.dart';
-// import 'package:mini_project_shoes_app/models/products/product_model.dart';
-// import 'package:provider/provider.dart';
-// import 'package:dio/dio.dart';
 
-// class ProductController extends ChangeNotifier {
-//   final ApiProduct _apiProduct = ApiProduct();
-//   List<ProductModel>  _products = []; 
-//   bool _isLoaded = false ;
-
-//   List<ProductModel>? get products => _products; // Ganti tipe data getter menjadi List<ProductModel>
-//   bool get isLoaded => _isLoaded;
-
-//   void getProducts() async {
-//     print('getProducts berhasil dijalankan');
-//     _isLoaded = true;
-
-//     try {
-//       final response = await _apiProduct.getProducts();
-
-//       print('getProducts response: $response');
-       
-//       // Periksa apakah response tidak null dan memiliki data
-//      if (response != null) {
-//        print('sebelum memasukkan $response');
-//         // _products = (response as List<dynamic>).map((item) => ProductModel.fromJson(item)).toList();
-//         print('getProducts berhasil dimuat');
-//     print('Products: $_products');
-//     notifyListeners();
-//     } else {
-//       print('Response kosong');
-//       }
-
-//     } catch (e) {
-//       debugPrint('Error: $e');
-//     } finally {
-//       _isLoaded = false;
-//       notifyListeners();
-//     }
-//   }
-
-//   // Sisanya sama seperti sebelumnya
-// }
-
-
-// import 'package:flutter/material.dart';
-// import 'package:mini_project_shoes_app/models/products/api/api_product.dart';
-// import 'package:mini_project_shoes_app/models/products/product_model.dart';
-// import 'package:dio/dio.dart';
-
-// class ProductController extends ChangeNotifier {
-//   final ApiProduct _apiProduct = ApiProduct();
-//   List<ProductModel> _products = [];
-//   bool _isLoaded = false ;
-
-//   List<ProductModel> get products => _products;
-//   bool get isLoaded => _isLoaded;
-
-//   void getProducts() async {
-//     print('getProducts berhasil dijalankan');
-//     _isLoaded = true;
-
-//     try {
-//       final response = await _apiProduct.getProducts();
-
-//       print('getProducts response: $response');
-
-//       // Periksa apakah response tidak null dan memiliki data
-//       if (response != null && response.data != null) {
-//       // Cast the response.data to a List<dynamic> to handle potential data structures
-//       final List<dynamic> responseData = response.data;
-
-//       // Clear existing products to avoid duplicates on subsequent calls
-//       _products.clear();
-
-//       // Iterate through the response data and convert each item to a ProductModel
-//       for (var item in responseData) {
-//         // Assuming 'ProductModel' has a constructor that takes a Map<int, dynamic>
-//         final product = ProductModel.fromJson(item as Map<int, dynamic>);
-//         _products.add(product);
-//       }
-
-//       print('getProducts berhasil dimuat');
-//       print('Products 85: $_products');
-//         notifyListeners();
-//     }
-//     } catch (e) {
-//       debugPrint('Error: $e');
-//     } finally {
-//       _isLoaded = false;
-//       notifyListeners();
-//     }
-//   }
-// }
-
-// import 'package:dio/dio.dart';
-// import 'package:flutter/material.dart';
-// import 'package:mini_project_shoes_app/models/products/api/api_product.dart';
-// import 'package:mini_project_shoes_app/models/products/product_model.dart';
-
-
-// class ProductController extends ChangeNotifier {
-//   final ApiProduct _apiProduct = ApiProduct();
-//   List<ProductModel> _products = [];
-//   bool _isLoaded = false;
-
-//   List<ProductModel> get products => _products;
-//   bool get isLoaded => _isLoaded;
-
-//   void getProducts() async {
-//     print('getProducts berhasil dijalankan $_products');
-//     _isLoaded = true;
-
-//     try {
-//       final response = await _apiProduct.getProducts();
-
-//       print('getProducts response: $response');
-
-//       // Check if response is not null and if it contains data
-//       if (response != null && response.statusCode == 200) {
-//         // Clear existing products to avoid duplicates on subsequent calls
-//         _products.clear();
-
-//         // Parse the response data
-//         final List<dynamic> responseData = response.data;
-//         responseData.forEach((item) {
-//           // Assuming 'ProductModel.fromJson()' method exists to parse JSON to ProductModel
-//           final product = ProductModel.fromJson(item);
-//           _products.add(product);
-//         });
-
-//         print('getProducts berhasil dimuat');
-//         print('Products: $_products');
-//         notifyListeners();
-//       } else {
-//         print('Response kosong atau tidak berhasil: ${response.statusCode}');
-//       }
-//     } catch (e) {
-//       print('Error: $e');
-//     } finally {
-//       _isLoaded = false;
-//       notifyListeners();
-//     }
-    
-   
-    
-//   }
-
-  
-
-
-//  Future<List<ProductModel>> getProductsByCategoryId(int categoryId) async {
-//     try {
-//       final response = await _apiProduct.getProductsByCategoryId(categoryId);
-
-//       if (response != null && response.statusCode == 200) {
-//         final List<dynamic> responseData = response.data;
-//         final List<ProductModel> products = responseData
-//             .map((item) => ProductModel.fromJson(item))
-//             .toList();
-//         return products;
-//       } else {
-//         print('Failed to fetch products by category ID. Status code: ${response?.statusCode}');
-//         return [];
-//       }
-//     } catch (e) {
-//       print('Error: $e');
-//       return [];
-//     }
-//   }
-
-// }
 
 import 'package:flutter/material.dart';
 import 'package:mini_project_shoes_app/models/api/api_product.dart';
@@ -183,6 +11,8 @@ class ProductController extends ChangeNotifier {
 
   List<ProductModel> get products => _products;
   bool get isLoaded => _isLoaded;
+  
+  List<ProductModel> get allProducts => _products;
 
   /// Retrieves products from the API
   Future<void> getProducts() async {
@@ -216,7 +46,7 @@ class ProductController extends ChangeNotifier {
 
 
   void addProduct(Map<String, dynamic> newProductData) async {
-    print("Add Book Berhasil Dijalankan");
+    print("Add Produk Berhasil Dijalankan");
     _isLoaded = true;
     notifyListeners();
     try {
@@ -234,13 +64,13 @@ class ProductController extends ChangeNotifier {
   }
 
     void deleteProduct(int productId) async {
-    print("Delete Book Berhasil Dijalankan");
+    print("Delete Produk Berhasil Dijalankan");
     _isLoaded = true;
     notifyListeners();
     try {
       final response = await _apiProduct.deleteProduct(productId);
       if (response.statusCode == 204) {
-        print("Buku Berhasil Dihapus");
+        print("Produk Berhasil Dihapus");
         getProducts();
       }
     } catch (e) {
@@ -251,6 +81,49 @@ class ProductController extends ChangeNotifier {
     }
   }
 
+
+  
+   void updateProduct(int productId, Map<String, dynamic> updatedProductData) async {
+    print("Update Produk Berhasil Dijalankan");
+    _isLoaded = true;
+    notifyListeners();
+    try {
+      final response = await _apiProduct.updateProduct(productId, updatedProductData);
+      if (response.statusCode == 200) {
+        print("Produk Berhasil Diperbarui");
+        getProducts();
+      }
+    } catch (e) {
+      debugPrint('Error: $e');
+    } finally {
+      _isLoaded = false;
+      notifyListeners();
+    }
+  }
+   
+   void searchProducts(String keyword) {
+  // Create a new list to store the search results
+  List<ProductModel> searchResults = [];
+
+  // If the keyword is empty, return all products
+  if (keyword.isEmpty) {
+    _products = allProducts;
+  } else {
+    // Loop through each product
+    for (var product in allProducts) {
+      // Check if the product name contains the search keyword
+      if (product.nameProduct.toLowerCase().contains(keyword.toLowerCase())) {
+        // If yes, add the product to the search results list
+        searchResults.add(product);
+      }
+    }
+    // Update _products with the search results
+    _products = searchResults;
+  }
+
+  // Notify listeners that the data has been updated
+  notifyListeners();
+}
 
   /// Retrieves products by category ID from the API
  

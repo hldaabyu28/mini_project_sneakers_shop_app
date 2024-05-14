@@ -17,7 +17,9 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+       backgroundColor: Color(0xFFE0DEEB),
       appBar: AppBar(
         title: Text('Chat Bot AI', style: TextStyle(color: Colors.white)),
         backgroundColor: Color(0xFF4F4FEC),

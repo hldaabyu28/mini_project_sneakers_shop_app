@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:mini_project_shoes_app/controllers/cart_controller.dart';
 import 'package:mini_project_shoes_app/controllers/checkout_controller.dart';
 import 'package:provider/provider.dart';
+import 'package:quickalert/quickalert.dart';
 
 class CartPage extends StatelessWidget {
   
@@ -10,7 +12,7 @@ class CartPage extends StatelessWidget {
     final cartController = Provider.of<CartController>(context);
 
     return Scaffold(
-      backgroundColor: Color(0xFFF5F3FA),
+      backgroundColor: Color(0xFFE0DEEB),
       appBar: AppBar(
         title: Text('Cart', style: TextStyle(color: Colors.white),),
         centerTitle: true,
@@ -34,7 +36,7 @@ class CartPage extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          tileColor: Color(0xFFDBDBEE),
+                          tileColor: Color(0xFFF5F3FA),
                           leading: SizedBox(  
                             width: 50,
                             height: 50,
@@ -50,29 +52,58 @@ class CartPage extends StatelessWidget {
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              IconButton(
-                                icon: Icon(Icons.remove),
-                                onPressed: () {
-                                  cartController.decrementQuantity(product);
-                                },
-                               
-                            
+                              Material(
+                                borderRadius: BorderRadius.circular(15), // Bentuk yang diinginkan
+                                color: Color(0xFF4F4FEC),
+                                child: InkWell(
+                                  onTap: () {
+                                    cartController.decrementQuantity(product);
+                                  },
+                              child: Padding(
+                                padding: const EdgeInsets.all(1.0),
+                                  child: Icon(Icons.remove, color: Colors.white,),
+                                  ),
+                                ),
                               ),
+                              Gap(5),
                               Text(
                                 '${cartController.getItemCount(product)}',
-                                style: TextStyle(fontSize: 16),
+                                style: TextStyle(fontSize: 16 , fontWeight: FontWeight.bold),
                               ),
-                              IconButton(
-                                icon: Icon(Icons.add),
-                                onPressed: () {
-                                  cartController.incrementQuantity(product);
-                                },
-                                
+                              Gap(5),
+                              Material(
+                                borderRadius: BorderRadius.circular(15), // Bentuk yang diinginkan
+                                color: Color(0xFF4F4FEC),
+                                child: InkWell(
+                                  onTap: () {
+                                    cartController.incrementQuantity(product);
+                                  },
+                              child: Padding(
+                                padding: const EdgeInsets.all(1.0),
+                                  child: Icon(Icons.add, color: Colors.white,),
+                                  ),
+                                ),
                               ),
                               IconButton(
                                 icon: Icon(Icons.delete),
                                 onPressed: () {
-                                  cartController.removeFromCart(index);
+                                  QuickAlert.show(
+                                    context: context , 
+                                    type: QuickAlertType.confirm,
+                                    title: 'Delete Form Cart',
+                                    confirmBtnColor: Color(0xFF4F4FEC),
+                                    text: 'Are you sure you want to delete this product from cart?',
+                                    confirmBtnText: 'Delete',
+                                    cancelBtnText: 'Cancel',
+                                    onConfirmBtnTap: (){
+                                      cartController.removeFromCart(index);
+                                      Navigator.pop(context);
+                                    },
+                                    onCancelBtnTap: (){
+                                      Navigator.pop(context);
+                                    },
+
+                                    );
                                 },
                               ),
                             ],
@@ -112,9 +143,8 @@ class CartPage extends StatelessWidget {
                            quantity: cartController.cartItems.map((product) => product.quantity).reduce((a, b) => a + b),
                           productPrice: cartController.totalPrice(),
                          productImage: cartController.cartItems.map((product) => product.imageProduct ?? '').join(', '),
-                  
-                         
                         );
+
                       },
                       child: Text('Checkout' , style: TextStyle(color: Colors.white),),
                       style: ElevatedButton.styleFrom(

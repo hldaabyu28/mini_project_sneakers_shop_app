@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:mini_project_shoes_app/controllers/product_controller.dart';
 import 'package:provider/provider.dart';
+import 'package:quickalert/quickalert.dart';
 
 class AddProduct extends StatefulWidget {
   const AddProduct({Key? key}) : super(key: key);
@@ -18,14 +19,17 @@ class _AddProductState extends State<AddProduct> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String? selectedGender;
 
-  @override
   
   @override
   Widget build(BuildContext context) {
     final productController = Provider.of<ProductController>(context);
     return Scaffold(
+       backgroundColor: Color(0xFFE0DEEB),
       appBar: AppBar(
-        title: Text('Add Product'),
+        title: Text('Add Product', style: TextStyle(color: Colors.white),),
+        iconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: Color(0xFF4F4FEC),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -53,7 +57,7 @@ class _AddProductState extends State<AddProduct> {
                 TextFormField(
                   controller: priceController,
                   decoration: InputDecoration(
-                    hintText: "Price",
+                    hintText: "Price IDR",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
@@ -140,7 +144,8 @@ class _AddProductState extends State<AddProduct> {
                       ),
                     ),
                     onPressed: () {
-                      final newProductData = {
+                      if (_formKey.currentState!.validate()) {
+                         final newProductData = {
                         'name_product': productNameController.text,
                         'price': priceController.text,
                         'gender': selectedGender,
@@ -150,6 +155,15 @@ class _AddProductState extends State<AddProduct> {
                       };
                       Provider.of<ProductController>(context, listen: false).addProduct(newProductData);
                       Navigator.pop(context);
+
+                      QuickAlert.show(
+                        context: context,
+                        type: QuickAlertType.success,
+                        text: 'Product added successfully',
+                        confirmBtnColor: Color(0xFF4F4FEC),
+                      );
+                      }
+                     
 
                       
                     },

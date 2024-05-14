@@ -26,24 +26,25 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF4F4FEC),
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SvgPicture.asset(
-              'assets/svg/logo.svg',
-              width: 100,
-              height: 100,
-              color: Colors.white,
+              'assets/svg/logo fix.svg',
+              width: 70,
+              height: 70,
             ),
             Gap(10),
             Text(
               'Script',
-              style: GoogleFonts.delaGothicOne(
-                color: Colors.white,
+              style: TextStyle(
+                color: Color(0xFF4F4FEC),
                 fontSize: 40,
+                fontFamily: 'Colvetica',
+                fontWeight: FontWeight.bold,
               ),
               
             ),

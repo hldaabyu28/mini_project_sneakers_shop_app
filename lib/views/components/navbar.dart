@@ -2,8 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:mini_project_shoes_app/helpers/database.dart';
-import 'package:mini_project_shoes_app/views/login.dart';
-import 'package:mini_project_shoes_app/views/widgets/cartpage.dart';
 import 'package:mini_project_shoes_app/views/widgets/splash_page.dart';
 
 
@@ -30,7 +28,7 @@ class Navbar extends StatelessWidget {
                 ),
                 Gap(6),
                 Text(
-                  'Script Shoes Store', style: TextStyle(color: Color(0xFF4F4FEC) , fontWeight: FontWeight.bold, fontSize: 20),
+                  'Script Sneakers Shop', style: TextStyle(color: Color(0xFF4F4FEC) , fontWeight: FontWeight.bold, fontSize: 20),
                 )
               ],
             ),

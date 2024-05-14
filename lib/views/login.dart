@@ -4,6 +4,7 @@ import 'package:mini_project_shoes_app/helpers/database.dart';
 import 'package:mini_project_shoes_app/models/user_model.dart';
 import 'package:mini_project_shoes_app/views/admin/admin_home.dart';
 import 'package:mini_project_shoes_app/views/main_screens.dart';
+import 'package:quickalert/quickalert.dart';
 
 
 // Import statements...
@@ -29,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
       usrPassword: passwordController.text));
 
   if (response == true) {
-    // Jika login benar, periksa apakah pengguna adalah admin
+
     if (UsernameController.text == 'admin1' && passwordController.text == 'admin1') {
       // Redirect ke halaman admin
       if (!mounted) return;
@@ -41,7 +42,12 @@ class _LoginPageState extends State<LoginPage> {
           context, MaterialPageRoute(builder: (context) => MainScreen()), (route) => false);
     }
   } else {
-    // Jika login gagal, set nilai bool untuk menampilkan pesan kesalahan
+    QuickAlert.show(
+      context: context,
+      type: QuickAlertType.error,
+      text: 'Username or Password is wrong',
+      confirmBtnColor: Color(0xFF4F4FEC),
+    );
     setState(() {
       isLoginTrue = true;
     });
@@ -60,12 +66,22 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Text(
+                'Welcome Back',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF4F4FEC),
+                ),
+              ),
+              Gap(20),
               Image.asset(
                 'assets/images/login.png',
                 width: 150,
                 height: 150,
               ),
               Gap(6),
+              
               Form(
                 key: _formKey,
                 child: Column(
@@ -83,6 +99,10 @@ class _LoginPageState extends State<LoginPage> {
                   prefixIcon: const Icon(Icons.person),
                 ),
                 validator: (value) {
+                    if (value!.isEmpty) {
+                          return "username is required";
+                        }
+                        return null;
                
                 },
               ),
@@ -128,24 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                       }
                 
                 
-                  //     String email = emailController.text.trim();
-                  //     String password = passwordController.text.trim();
-                
-                  // if (email.isNotEmpty && password.isNotEmpty) {
-                  //   try {
-                  //     await authController.login(email, password);
-                  //     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen()), (route) => false);
-                  //   } catch (e) {
-                  //     // Show error message to user
-                  //     ScaffoldMessenger.of(context).showSnackBar(
-                  //       SnackBar(content: Text('Registration failed: $e')),
-                  //     );
-                  //   }
-                  // } else {
-                  //   ScaffoldMessenger.of(context).showSnackBar(
-                  //     SnackBar(content: Text('Email and password cannot be empty')),
-                  //   );
-                  // }
+              
                       
                     },
                     child: Text('Login', style: TextStyle(color: Colors.white),),

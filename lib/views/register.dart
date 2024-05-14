@@ -27,7 +27,10 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Register'),
+        title: Text('Sign Up', style: TextStyle(color: Colors.white),),
+        centerTitle: true,
+        backgroundColor: Color(0xFF4F4FEC),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: Column(
         children: [
@@ -145,7 +148,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               });
                           }
                         },
-                        child: Text('Register', style: TextStyle(color: Colors.white),),
+                        child: Text('Sign Up', style: TextStyle(color: Colors.white),),
                         style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFF4F4FEC),
                         shape: RoundedRectangleBorder(
