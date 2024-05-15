@@ -18,12 +18,13 @@ class IntroPage2 extends StatelessWidget {
           'Comfortable',
           style: TextStyle(
             color: Color.fromARGB(255, 113, 113, 232),
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+            fontSize: 22,
+            fontWeight: FontWeight.normal,
+            fontFamily: 'Colvetica',
           ),
         ),
-         Text('Fashionable', style: TextStyle(color: Color.fromARGB(255, 113, 113, 232), fontSize: 20, fontWeight: FontWeight.bold),),
-         Text('Sneakers', style: TextStyle(color: Color(0xFF4F4FEC), fontSize: 20, fontWeight: FontWeight.bold),),
+         Text('Fashionable', style: TextStyle(color: Color.fromARGB(255, 113, 113, 232), fontSize: 22, fontWeight: FontWeight.normal , fontFamily: 'Colvetica'),),
+         Text('Sneakers', style: TextStyle(color: Color(0xFF4F4FEC), fontSize: 22, fontWeight: FontWeight.normal , fontFamily: 'Colvetica'),),
          
          
         ],

@@ -1,16 +1,42 @@
-# mini_project_shoes_app
+# Script Sneakers Shop App
+### About Project
+Industri sepatu telah berkembang pesat dalam beberapa tahun terakhir, khususnya di segmen sneakers. Sneaker tidak hanya dipandang sebagai alas kaki, tetapi juga sebagai simbol gaya hidup dan status bagi banyak orang. Tren ini menciptakan peluang besar untuk mengembangkan aplikasi mobile yang khusus menawarkan pengalaman belanja dan berbagi informasi seputar sneakers.
 
-A new Flutter project.
+Konsumen semakin beralih ke platform digital untuk membeli barang, termasuk sneakers. Aplikasi mobile memberikan kenyamanan dan aksesibilitas yang lebih besar bagi pengguna untuk menjelajahi, membandingkan, dan membeli produk secara langsung dari perangkat mereka.
+tambahkan deskripsi project disini
 
-## Getting Started
+### Features
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+##### User
+- Login Register 
+- Read New Product and Information Promo
+- Add product to cart
+- Checkout WhatsApp
+- Search product by keyword 
+- Recomendations by Chat Bot AI
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+##### Admin
+- Login
+- Add product
+- Read product
+- Edit product
+- Delete product
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Tech Stacks
+- Flutter
+- Android Studio
+- Postman
+- Supabase 
+- Visual Studio Code
+
+
+### Sample App Demo
+
+
+
+
+https://drive.google.com/drive/folders/1FSBIe-8Db6rqptOzOsnFrybWahadxQh8?usp=drive_link
+
+
+### Setup

@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.only(left: 24),
-              child: Text(
+              child: Text( key: Key('special_offers'),
                 'Special Offers',
                 style: TextStyle(
                   fontSize: 18.0,

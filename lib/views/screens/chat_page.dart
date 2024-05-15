@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:mini_project_shoes_app/env/env.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({Key? key});
@@ -118,7 +119,7 @@ class _ChatPageState extends State<ChatPage> {
     });
 
     // Send user message to the server and get response
-    String key = 'sk-proj-tXTwZmBklQzxliExg9PhT3BlbkFJ2toN4t71UbBXTpQ6wEJ9';
+    String key = Env.apiKey;
     final apiKey = key;
     const apiUrl = 'https://api.openai.com/v1/chat/completions';
     final response = await http.post(
@@ -158,7 +159,7 @@ class _ChatPageState extends State<ChatPage> {
 
   // Function to check if user message contains keywords related to shoes
   bool _containsShoeKeywords(String message) {
-    final shoeKeywords = ['harga', 'produk', 'merk', 'ukuran', 'warna', 'sepatu', 'sepatu', 'shoes', 'shoes'];
+    final shoeKeywords = ['harga', 'produk', 'merk', 'ukuran', 'warna', 'sepatu', 'sepatu', 'shoes', 'shoes' , 'sneakers' , ];
     for (String keyword in shoeKeywords) {
       if (message.toLowerCase().contains(keyword)) {
         return true;

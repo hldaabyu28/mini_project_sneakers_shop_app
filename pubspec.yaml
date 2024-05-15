@@ -54,11 +54,28 @@ dependencies:
   url_launcher_android: ^6.3.1
   url_launcher: ^6.2.6
   quickalert: ^1.1.0
+  envied: ^0.5.4+1
+  
+
+
   
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+  envied_generator: ^0.5.4+1
+  build_runner: ^2.4.9
+
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logo/logo_launcher.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
+
+  
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -84,6 +101,7 @@ flutter:
     - assets/svg/
     - assets/fonts/
     - assets/logo/
+    - assets/logo/icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -110,3 +128,6 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+
+

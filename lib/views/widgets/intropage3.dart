@@ -14,7 +14,7 @@ class IntroPage3 extends StatelessWidget {
         children: [
          Center(child: Image.asset('assets/images/Asset 1-8.png', width: 250, height: 250,)),
          Gap(10),
-         Text('Get Your Sneakers', style: TextStyle(color: Color(0xFF4F4FEC), fontSize: 20, fontWeight: FontWeight.bold),),
+         Text('Get Your Sneakers', style: TextStyle(color: Color(0xFF4F4FEC), fontSize: 22, fontWeight: FontWeight.normal, fontFamily: 'Colvetica'),),
          
         ],
       )
