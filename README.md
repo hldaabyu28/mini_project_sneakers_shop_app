@@ -32,11 +32,8 @@ tambahkan deskripsi project disini
 
 
 ### Sample App Demo
-
-
-
-
 https://drive.google.com/drive/folders/1FSBIe-8Db6rqptOzOsnFrybWahadxQh8?usp=drive_link
+![Group 39](https://github.com/serdadu78/mini_project_sneakers_shop_app/assets/145460055/6e1edfe6-bf7c-414a-9544-bce4818a92c9)
 
 
 ### Setup
